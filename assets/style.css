@@ -1,0 +1,18 @@
+body {
+    margin: auto;
+}
+
+header {
+    color: white;
+}
+
+
+li:hover {
+    cursor: pointer;
+}
+
+.today {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 30px;
+}
