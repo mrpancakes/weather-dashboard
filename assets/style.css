@@ -1,5 +1,6 @@
 body {
     margin: auto;
+    
 }
 
 header {
@@ -11,8 +12,17 @@ li:hover {
     cursor: pointer;
 }
 
-.today {
+.city {
     border: 1px solid lightgray;
     border-radius: 4px;
     padding: 30px;
+    line-height: 3rem;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
