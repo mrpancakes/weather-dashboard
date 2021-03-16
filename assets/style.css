@@ -26,3 +26,17 @@ li:hover {
 .hide {
     display: none;
 }
+
+.forecast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.card{
+    color:white;
+    min-width: 15%;
+    height: 200px;
+    background-color: rgb(41, 117, 184);
+}

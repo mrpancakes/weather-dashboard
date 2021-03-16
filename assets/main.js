@@ -6,8 +6,12 @@ const searchVal = $("#search-value");
 const apiKey = "04c212983054ab4c56a6b85900e38902";
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?q=`;
 const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=`;
+const uvIndexUrl = `https://api.openweathermap.org/data/2.5/onecall?`
 let citiesUl = $("ul");
 let userInput = '';
+let cityCoord = {};
+
+
 searchArr = [];
 
 $("#search-button").click(function (event) {
@@ -22,10 +26,10 @@ $("#search-button").click(function (event) {
     li.setAttribute("class", "list-group-item list-group-item-action")
     li.setAttribute("id", "cityLi");
     citiesUl.append(li);
-    
+
     currentWeatherFetch();
     forecastFetch();
-    
+
 });
 
 
@@ -40,28 +44,48 @@ function currentWeatherFetch() {
             let temp = Math.round((data.main.temp - 273.15) * (9 / 5) + 32); // Convert temp from Kelvin to Farenheit
             let humidity = data.main.temp;
             let windSpeed = data.wind.speed;
-            // let uvIndex = // Need a different API call for the UV index
-
             $("#dashboard").attr("class", "col-12 col-md-7 col-lg-9 p-5 show");
             $("#userCity").text(userInput);
             console.log(`Temp in F: ${temp} °F`);
             $("#temp").text(`Temperature: ${temp} °F`);
             $("#humidity").text(`Humidity: ${humidity}%`);
             $("#wind").text(`Wind Speed: ${windSpeed} MPH`);
-            $("#UV").text(`UV Index:`);
+            cityCoord = data.coord; // change the value of the lat and lon coordinates so the forecast can call it
+            console.log(cityCoord);
         })
 }
 
-function forecastFetch() {
-    const requestUrl = `${forecastUrl}${userInput}&cnt=5&appid=${apiKey}`;
 
-    fetch(requestUrl)
+// Get the UV Index. Added a brief setTimeout function so the currentWeatherFetch function could run and allow the lon and lat coordinates to populate
+function forecastFetch() {
+    setTimeout(function () {
+        const requestUrl = `${uvIndexUrl}lat=${cityCoord.lat}&lon=${cityCoord.lon}&appid=${apiKey}`;
+        console.log(requestUrl);
+        fetch(requestUrl)
         .then(response => response.json())
         .then(data => {
             console.log(data);
+
+            let uvIndex = data.current.uvi;
            
+            $("#UV").text(`UV Index: ${uvIndex}`);
         })
+    }, 180);
 }
+
+
+
+
+// function forecastFetch() {
+//     const requestUrl = `${forecastUrl}${userInput}&cnt=5&appid=${apiKey}`;
+
+//     fetch(requestUrl)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+
+//         })
+// }
 
 
 function displaySearchResults() {
@@ -80,7 +104,6 @@ function displaySearchResults() {
         li.setAttribute("id", "cityLi");
         li.setAttribute("data-set", city)
         citiesUl.append(li);
-
     }
 }
 
