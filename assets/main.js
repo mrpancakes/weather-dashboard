@@ -25,7 +25,7 @@ $("#search-button").click(function (event) {
     event.preventDefault();
     userInput = searchVal.val().trim();
 
-    if (userInput === ""){
+    if (userInput === "") {
         return;
     }
 
@@ -74,85 +74,133 @@ function forecastFetch() {
         const requestUrl = `${uvIndexUrl}lat=${cityCoord.lat}&lon=${cityCoord.lon}&units=imperial&appid=${apiKey}`;
         console.log(requestUrl);
         fetch(requestUrl)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            let uvIndex = data.current.uvi;
-            $("#UV").text(`UV Index: ${uvIndex}`);
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let uvIndex = data.current.uvi;
+                $("#UV").text(`UV Index: ${uvIndex}`);
 
-            $("#temp1").text(`Temp: ${Math.round(data.daily[1].temp.day)} °F`);
-            $("#humidity1").text(`Humidity: ${Math.round(data.daily[1].humidity)}%`);
+                $("#temp1").text(`Temp: ${Math.round(data.daily[1].temp.day)} °F`);
+                $("#humidity1").text(`Humidity: ${Math.round(data.daily[1].humidity)}%`);
 
-            $("#temp2").text(`Temp: ${Math.round(data.daily[2].temp.day)} °F`);
-            $("#humidity2").text(`Humidity: ${Math.round(data.daily[2].humidity)}%`);
+                $("#temp2").text(`Temp: ${Math.round(data.daily[2].temp.day)} °F`);
+                $("#humidity2").text(`Humidity: ${Math.round(data.daily[2].humidity)}%`);
 
-            $("#temp3").text(`Temp: ${Math.round(data.daily[3].temp.day)} °F`);
-            $("#humidity3").text(`Humidity: ${Math.round(data.daily[3].humidity)}%`);
+                $("#temp3").text(`Temp: ${Math.round(data.daily[3].temp.day)} °F`);
+                $("#humidity3").text(`Humidity: ${Math.round(data.daily[3].humidity)}%`);
 
-            $("#temp4").text(`Temp: ${Math.round(data.daily[4].temp.day)} °F`);
-            $("#humidity4").text(`Humidity: ${Math.round(data.daily[4].humidity)}%`);
+                $("#temp4").text(`Temp: ${Math.round(data.daily[4].temp.day)} °F`);
+                $("#humidity4").text(`Humidity: ${Math.round(data.daily[4].humidity)}%`);
 
-            $("#temp5").text(`Temp: ${Math.round(data.daily[5].temp.day)} °F`);
-            $("#humidity5").text(`Humidity: ${Math.round(data.daily[5].humidity)}%`);
+                $("#temp5").text(`Temp: ${Math.round(data.daily[5].temp.day)} °F`);
+                $("#humidity5").text(`Humidity: ${Math.round(data.daily[5].humidity)}%`);
 
-            // Populate weather icons for each day
+                // Populate weather icons for each day
 
-            // let weatherConditionsArr = [];
+                // let weatherConditionsArr = [];
 
-            // weatherConditionsArr.push(firstDayWeather = data.daily[1].weather[0].main.toLowerCase());
-            // weatherConditionsArr.push(firstDayWeather = data.daily[2].weather[0].main.toLowerCase());
-            // weatherConditionsArr.push(firstDayWeather = data.daily[3].weather[0].main.toLowerCase());
-            // weatherConditionsArr.push(firstDayWeather = data.daily[4].weather[0].main.toLowerCase());
-            // weatherConditionsArr.push(firstDayWeather = data.daily[5].weather[0].main.toLowerCase());
+                // weatherConditionsArr.push(data.daily[1].weather[0].main.toLowerCase());
+                // weatherConditionsArr.push(data.daily[2].weather[0].main.toLowerCase());
+                // weatherConditionsArr.push(data.daily[3].weather[0].main.toLowerCase());
+                // weatherConditionsArr.push(data.daily[4].weather[0].main.toLowerCase());
+                // weatherConditionsArr.push(data.daily[5].weather[0].main.toLowerCase());
 
-            
-            let firstDayWeather = data.daily[1].weather[0].main.toLowerCase();
-            let secondDayWeather = data.daily[2].weather[0].main.toLowerCase();
-            let thirdDayWeather = data.daily[3].weather[0].main.toLowerCase();
-            let fourthDayWeather = data.daily[4].weather[0].main.toLowerCase();
-            let fifthDayWeather = data.daily[5].weather[0].main.toLowerCase();
-
-            console.log(firstDayWeather);
-
-            if (firstDayWeather === "rain"){
-                $("#day1Conditions").attr("class", "fas fa-cloud-rain");
-            } else if (firstDayWeather === "clear sky"){
-                $("#day1Conditions").attr("class", "fas fa-sun");
-            } else if (firstDayWeather === "few clouds"){
-                $("#day1Conditions").attr("class", "fas fa-cloud-sun");
-            } else if (firstDayWeather === "scattered clouds"){
-                $("#day1Conditions").attr("class", "fas fa-cloud");
-            } else if (firstDayWeather === "broken clouds"){
-                $("#day1Conditions").attr("class", "fas fa-cloud-sun");
-            } else if (firstDayWeather === "shower rain"){
-                $("#day1Conditions").attr("class", "fas fa-cloud-showers-heavy");
-            } else if (firstDayWeather === "thunderstorm"){
-                $("#day1Conditions").attr("class", "fas fa-bolt");
-            } else if (firstDayWeather === "snow"){
-                $("#day1Conditions").attr("class", "fas fa-snowflake");
-            } else if (firstDayWeather === "mist"){
-                $("#day1Conditions").attr("class", "fas fa-water");
-            }
-        })
+                // console.log(weatherConditionsArr);
 
 
 
+                // for (i = 0; i < weatherConditionsArr.length; i++) {
+                //     if (weatherConditionsArr[i] === "rain") {
+                //         $(`#weather${[i]}`).attr("class", "fas fa-cloud-rain");
+                //     }
+                // }
+
+
+                let firstDayWeather = data.daily[1].weather[0].main.toLowerCase();
+                let secondDayWeather = data.daily[2].weather[0].main.toLowerCase();
+                let thirdDayWeather = data.daily[3].weather[0].main.toLowerCase();
+                let fourthDayWeather = data.daily[4].weather[0].main.toLowerCase();
+                let fifthDayWeather = data.daily[5].weather[0].main.toLowerCase();
+
+                console.log(firstDayWeather);
+                console.log(secondDayWeather);
+                console.log(thirdDayWeather);
+                console.log(fourthDayWeather);
+                console.log(fifthDayWeather);
+
+                if (firstDayWeather.includes("rain")){
+                    $("#weather1").attr("class", "fas fa-cloud-rain");
+                } else if (firstDayWeather.includes("clear")){
+                    $("#weather1").attr("class", "fas fa-sun");
+                } else if (firstDayWeather.includes("clouds")){
+                    $("#weather1").attr("class", "fas fa-cloud");
+                } else if (firstDayWeather.includes("thunderstorm")){
+                    $("#weather1").attr("class", "fas fa-bolt");
+                } else if (firstDayWeather.includes("snow")){
+                    $("#weather1").attr("class", "fas fa-snowflake");
+                } else if (firstDayWeather.includes("mist")){
+                    $("#weather1").attr("class", "fas fa-water");
+                }
+
+                if (secondDayWeather.includes("rain")){
+                    $("#weather2").attr("class", "fas fa-cloud-rain");
+                } else if (secondDayWeather.includes("clear")){
+                    $("#weather2").attr("class", "fas fa-sun");
+                } else if (secondDayWeather.includes("clouds")){
+                    $("#weather2").attr("class", "fas fa-cloud");
+                } else if (secondDayWeather.includes("thunderstorm")){
+                    $("#weather2").attr("class", "fas fa-bolt");
+                } else if (secondDayWeather.includes("snow")){
+                    $("#weather2").attr("class", "fas fa-snowflake");
+                } else if (secondDayWeather.includes("mist")){
+                    $("#weather2").attr("class", "fas fa-water");
+                }
+
+                if (thirdDayWeather.includes("rain")){
+                    $("#weather3").attr("class", "fas fa-cloud-rain");
+                } else if (thirdDayWeather.includes("clear")){
+                    $("#weather3").attr("class", "fas fa-sun");
+                } else if (thirdDayWeather.includes("clouds")){
+                    $("#weather3").attr("class", "fas fa-cloud");
+                } else if (thirdDayWeather.includes("thunderstorm")){
+                    $("#weather3").attr("class", "fas fa-bolt");
+                } else if (thirdDayWeather.includes("snow")){
+                    $("#weather3").attr("class", "fas fa-snowflake");
+                } else if (thirdDayWeather.includes("mist")){
+                    $("#weather3").attr("class", "fas fa-water");
+                }
+
+                if (fourthDayWeather.includes("rain")){
+                    $("#weather4").attr("class", "fas fa-cloud-rain");
+                } else if (fourthDayWeather.includes("clear")){
+                    $("#weather4").attr("class", "fas fa-sun");
+                } else if (fourthDayWeather.includes("clouds")){
+                    $("#weather4").attr("class", "fas fa-cloud");
+                } else if (fourthDayWeather.includes("thunderstorm")){
+                    $("#weather4").attr("class", "fas fa-bolt");
+                } else if (fourthDayWeather.includes("snow")){
+                    $("#weather4").attr("class", "fas fa-snowflake");
+                } else if (fourthDayWeather.includes("mist")){
+                    $("#weather4").attr("class", "fas fa-water");
+                }
+
+                if (fifthDayWeather.includes("rain")){
+                    $("#weather5").attr("class", "fas fa-cloud-rain");
+                } else if (fifthDayWeather.includes("clear")){
+                    $("#weather5").attr("class", "fas fa-sun");
+                } else if (fifthDayWeather.includes("clouds")){
+                    $("#weather5").attr("class", "fas fa-cloud");
+                } else if (fifthDayWeather.includes("thunderstorm")){
+                    $("#weather5").attr("class", "fas fa-bolt");
+                } else if (fifthDayWeather.includes("snow")){
+                    $("#weather5").attr("class", "fas fa-snowflake");
+                } else if (fifthDayWeather.includes("mist")){
+                    $("#weather5").attr("class", "fas fa-water");
+                }
+
+            })
     }, 200);
 }
-
-
-
-
-// function forecastFetch() {
-//     const requestUrl = `${forecastUrl}${userInput}&cnt=5&appid=${apiKey}`;
-
-//     fetch(requestUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-
-//         })
-// }
 
 
 function displaySearchResults() {
