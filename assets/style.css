@@ -39,4 +39,5 @@ li:hover {
     min-width: 15%;
     height: 200px;
     background-color: rgb(41, 117, 184);
+    line-height: 2.5rem;
 }
