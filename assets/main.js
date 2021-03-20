@@ -5,8 +5,8 @@ $(document).ready(function () {
     let forecastContainer = $(".forecast");
     const apiKey = "04c212983054ab4c56a6b85900e38902";
     const baseUrl = `https://api.openweathermap.org/data/2.5/weather?q=`;
-    let iconBaseUrl = `http://openweathermap.org/img/wn/`;
-    let forecastBaseUrl = `http://api.openweathermap.org/data/2.5/forecast?q=`;
+    let iconBaseUrl = `https://openweathermap.org/img/wn/`;
+    let forecastBaseUrl = `https://api.openweathermap.org/data/2.5/forecast?q=`;
     let searchArr = [];
     let citiesUl = $("ul");
     let userInput = '';
