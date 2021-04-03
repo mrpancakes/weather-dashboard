@@ -5,7 +5,7 @@ This is a weather dashboard that displays the current weather and 5-day forecast
 
 ## Details
 
-* Used two APIs from https://openweathermap.org/ to display the current and future weather. The displayed weather data consist of:
+* Used two APIs from https://openweathermap.org/ to display the current and future weather. The displayed weather data consists of:
     * Weather conditions icon
     * Temperature
     * Humidity
